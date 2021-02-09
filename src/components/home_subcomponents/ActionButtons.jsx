@@ -107,7 +107,7 @@ class ActionButtons extends React.Component {
 
   isUserReact = () => {
     let reacts = this.state.reacts;
-
+    console.log(reacts);
     if (reacts.length > 0) {
       reacts.forEach((react) => {
         if (react.user._id.localeCompare(this.state.userId) === 0) {
