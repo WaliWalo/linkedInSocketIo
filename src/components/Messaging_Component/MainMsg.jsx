@@ -31,9 +31,12 @@ export default class MainMsg extends PureComponent {
       (msg) => msg.from === this.props.selectedUser
     );
     let allMsg = messageSent.concat(messageReceived);
-    allMsg.sort((a, b) => b.createdAt - a.createdAt);
+    let sorted = allMsg.sort(
+      (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+    );
+    console.log(sorted);
 
-    this.setState({ allMsg });
+    this.setState({ allMsg: sorted });
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -59,7 +62,7 @@ export default class MainMsg extends PureComponent {
         <div className="msg-dialog">
           <ul id="messages">
             {this.state.allMsg.length > 0 &&
-              this.state.allMsg.map((
+              this.state.allMsg.reverse().map((
                 msg,
                 i //displays all new messages
               ) => (
